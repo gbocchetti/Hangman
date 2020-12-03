@@ -1,5 +1,6 @@
 #Created by George Bocchetti on 12/03/2020
-
+#TODO: random word from dictionary
+#TODO: get a splitscreen setup with interactive console/bash on one side and file being edited on other
 def find_all(a_str, sub):
     start = 0
     start = a_str.find(sub, start)
