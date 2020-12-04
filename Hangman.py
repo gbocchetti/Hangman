@@ -1,6 +1,10 @@
 #Created by George Bocchetti on 12/03/2020
 #TODO: random word from dictionary
 #TODO: get a splitscreen setup with interactive console/bash on one side and file being edited on other
+
+import requests
+from random import choice
+
 def find_all(a_str, sub):
     start = 0
     start = a_str.find(sub, start)
@@ -10,7 +14,15 @@ def find_all(a_str, sub):
         start = a_str.find(sub, start+1)
     return occurences
 
-word = list('antenna')
+word_site = "https://www.mit.edu/~ecprice/wordlist.10000"
+response = requests.get(word_site)
+words = response.content.splitlines()
+word = choice(words)
+word = str(word, 'utf-8')
+
+#word = list('antenna')
+#print("Here's a peek: " + str(word))
+word = list(word)
 init_tries = 6
 tries = init_tries
 word_len = len(word)
@@ -21,8 +33,8 @@ while(tries > 0):
     char_guess = input('Guess a letter: ')
     while(len(char_guess) != 1):
         char_guess = input('Guess again; must be a single letter: ')
-    print(word)
-    print(char_guess)
+    #print(word)
+    #print(char_guess)
     if(char_guess not in word):
         tries = tries - 1
         print('Nope, better luck next time!\n')
@@ -39,5 +51,5 @@ while(tries > 0):
             break;
     else: assert(0), 'Huh?\n'
 
-if(tries == 0): print("You hung the hangman!\n")
+if(tries == 0): print("You hung the hangman! The word was: " + str(word)+ "\n")
 
